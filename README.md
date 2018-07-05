@@ -9,3 +9,7 @@ NOTES:
 * pythonwikibot command:
     python3 pwb.py pagefromfile -force -file:recipes2.doc
 
+# Screenshot
+How a recipe looks after scraping and uploading to mediawiki:
+
+![alt text](https://github.com/pomkos/cookpad_scrape/blob/master/Sample%20-%20import%20to%20wiki%20-%20Pineapple%20Carrot%20Cake.jpg)
