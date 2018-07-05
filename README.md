@@ -3,7 +3,9 @@ Scrape a cookpad profile for all recipes and pictures into a word document, in w
 
 NOTES:
 
-* Start with: python3 cookpad_russell.py
+* Start with: python3 cookpad_mainpic_first.py
+* Mainpic script: click on the mainpic to get to the original cookpad webpage
+* Thumb script: click on caption under the thumbnail of the mainpic to get to the original cookpad webpage
 * Picture download function commented out
 * Pictures will download in the folder this script is in
 * pythonwikibot command:
