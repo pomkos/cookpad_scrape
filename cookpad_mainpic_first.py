@@ -85,9 +85,9 @@ def get_steps(soup):
         extract = extracted.text.strip()
     #---- Steps Pics ----#
         steps_pics_lines = steps_pics_messy[i].a
-        download_steppic(steps_pics_lines, extract)
+        download_steppic(steps_pics_lines, extract, i)
 
-def download_steppic(steps_pics_lines, extract):
+def download_steppic(steps_pics_lines, extract, i):
     for child in steps_pics_lines.children:
         try:
             i=i+1
