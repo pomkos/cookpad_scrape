@@ -90,6 +90,6 @@ How the scrape output looks like:
 How a recipe looks after scraping and uploading to mediawiki:
 
 ## Mainpic Script
-![alt text](https://github.com/pomkos/cookpad_scrape/blob/master/Sample%20-%20import%20to%20wiki%20mainpic%20-%20M%C3%A1ln%C3%A1s%20k%C3%A1v%C3%A9torta%20-%20.jpg)
-## Thumb Script
 ![alt text](https://github.com/pomkos/cookpad_scrape/blob/master/Sample%20-%20import%20to%20wiki%20thumb%20-%20Pineapple%20Carrot%20Cake.jpg)
+## Thumb Script
+![alt text](https://github.com/pomkos/cookpad_scrape/blob/master/Sample%20-%20import%20to%20wiki%20mainpic%20-%20M%C3%A1ln%C3%A1s%20k%C3%A1v%C3%A9torta%20-%20.jpg)
