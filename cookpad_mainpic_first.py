@@ -47,85 +47,87 @@ def get_about(soup):
 
 def get_title(about):
     title = about.find('h1')
-    return title.text.strip()
+    title_ext = title.text.strip
+    return title_ext
 
-def get_mainpic():
+def get_mainpic(soup, title_ext):
+    for mainpic in soup:
+        try:
+            mainpic = soup.find(id='recipe_image')
+            mainpic_ext = mainpic.find(alt=title_ext)
+            mainpic_clean = mainpic_ext.get('src')
+            return mainpic_clean
+        except:
+            print("No Main Picture in " + title_ext)
+            pass
+def download_mainpic(title_ext, mainpic_clean):
+    mainpic_jpg = os.path.split(mainpic_clean)[1]
+    mainpic_name = title_ext + '.jpg'
+    #r2 = requests.get(mainpic_clean)
+    #with open(mainpic_name, "wb") as f2:
+    #    f2.write(r2.content)
+    return mainpic_name
+def get_ingredients(soup):
+    ingredients = soup.find(id='ingredients')
+    ingredients_ext = ingredients.ol.extract()
+    ingredients_clean = ingredients_ext.find_all(itemprop='ingredients')
+    f.write('\n'+'=Ingredients=' + '\n')
+    for ingredient in ingredients_clean:
+        ing = ingredient.text.strip()
+        f.write('* ' + ing + '\n')
+def get_steps(soup):
+    steps = soup.find(id='steps')
+    steps_p = steps.find_all(itemprop='recipeInstructions')
+    steps_pics_messy = steps.find_all(class_='step numbered-list__item card-sm')
+    f.write('\n'+'=Steps=' + '\n')
+    for i, step in enumerate(steps_p):
+        extracted = step.p.extract()
+        extract = extracted.text.strip()
+    #---- Steps Pics ----#
+        steps_pics_lines = steps_pics_messy[i].a
+        download_steppic(steps_pics_lines, extract)
 
-def download_mainpic():
-
-def get_ingredients():
-
-def get_steps():
-
-def download_steppic():
-
-def recipe():
+def download_steppic(steps_pics_lines, extract):
+    for child in steps_pics_lines.children:
+        try:
+            i=i+1
+            pic_link = child.find('img').get('src')
+            pic_jpg = os.path.split(pic_link)[0]
+            pic_jpg2 = os.path.split(pic_jpg)[0]
+            pic_jpg3 = os.path.split(pic_jpg2)[1]
+            pic_name = 'STEP-' + pic_jpg3 + '-' + str(i) + '.jpg'
+            f.write('\n' + '[[File:' + pic_name + '|300px|Step ' + str(i) + ']]' + '\n')
+            f.write('\n' + str(i) + '. ' + extract + '\n')
+            #r3 = requests.get(pic_link)
+            #with open(pic_name, "wb") as f3:
+            #    f3.write(r3.content)
+        except:
+            f.write('\n' + str(i) + '. ' + extract + '\n')
+            pass
+def recipe(about, get_mainpic):
     #--- Inside the Recipe Link, Scrape Info for... ---#
     for item in page_list:
         page = requests.get(item)
         soup = BeautifulSoup(page.text, 'lxml')
 
         #--- About Section ---#
-        get_about(soup)
+        about_clean = get_about(soup)
         #--- Title ---#
         title_ext = get_title(about)
-
         #---Main Picture ---#
-        for mainpic in soup:
-            try:
-                mainpic = soup.find(id='recipe_image')
-                mainpic_ext = mainpic.find(alt=title_ext)
-                mainpic_clean = mainpic_ext.get('src')
-            except:
-                print("No Main Picture in " + title_ext)
-                pass
+        mainpic_clean = get_mainpic(soup)
         #----Download Main Pic----#
-        mainpic_jpg = os.path.split(mainpic_clean)[1]
-        mainpic_name = title_ext + '.jpg'
-        #r2 = requests.get(mainpic_clean)
-        #with open(mainpic_name, "wb") as f2:
-        #    f2.write(r2.content)
+        download_mainpic(title_ext, mainpic_clean)
+        mainpic_name=download_mainpic(title_ext, mainpic_clean)
 
         f.write('\n' + "{{-start-}}" + "\n")
         f.write('\n' + '[[File:' + mainpic_name + '|' + 'link=' + item + "|'''" + title_ext + "'''" + ']]' + '\n')
         f.write('\n' + '=About=' + '\n' + about_clean + '\n')
 
         #--- Ingredients ---#
-        ingredients = soup.find(id='ingredients')
-        ingredients_ext = ingredients.ol.extract()
-        ingredients_clean = ingredients_ext.find_all(itemprop='ingredients')
-        f.write('\n'+'=Ingredients=' + '\n')
-        for ingredient in ingredients_clean:
-            ing = ingredient.text.strip()
-            f.write('* ' + ing + '\n')
+        get_ingredients(soup)
         #--- Steps ---#
-        steps = soup.find(id='steps')
-        steps_p = steps.find_all(itemprop='recipeInstructions')
-        steps_pics_messy = steps.find_all(
-            class_='step numbered-list__item card-sm')
-        f.write('\n'+'=Steps=' + '\n')
-    # f.write('\n <gallery mode="packed">')
-        for i, step in enumerate(steps_p):
-            extracted = step.p.extract()
-            extract = extracted.text.strip()
-        #---- Steps Pics ----#
-            steps_pics_lines = steps_pics_messy[i].a
-            for child in steps_pics_lines.children:
-                try:
-                    i=i+1
-                    pic_link = child.find('img').get('src')
-                    pic_jpg = os.path.split(pic_link)[0]
-                    pic_jpg2 = os.path.split(pic_jpg)[0]
-                    pic_jpg3 = os.path.split(pic_jpg2)[1]
-                    pic_name = 'STEP-' + pic_jpg3 + '-' + str(i) + '.jpg'
-                    f.write('\n' + '[[File:' + pic_name + '|300px|Step ' + str(i) + ']]' + '\n')
-                    f.write('\n' + str(i) + '. ' + extract + '\n')
-                    #r3 = requests.get(pic_link)
-                    #with open(pic_name, "wb") as f3:
-                    #    f3.write(r3.content)
-                except:
-                    f.write('\n' + str(i) + '. ' + extract + '\n')
-                    pass
+        get_steps(soup)
     # f.write('\n </gallery>')
         f.write('\n' + '[[Category:Recipes]]' + '\n')
         f.write('\n' + '{{-stop-}}' + '\n')
