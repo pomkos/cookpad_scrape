@@ -15,7 +15,17 @@ How the scrape output looks like:
 ```
 {{-start-}}
 
+### --- If Mainpic script used --- ###
+
 [[File:Ananászos sárgarépa torta tojás, olaj, tejtermék és gluténmentesen.jpg]]
+
+### --- /If Mainpic script used --- ###
+
+### --- If Thumb script used --- ###
+
+[[File:Paradicsomos lima bab pirított hagymával.jpg|link=https://cookpad.com/hu/receptek/5285845-paradicsomos-lima-bab-piritott-hagymaval|'''Paradicsomos lima bab pirított hagymával''']]
+
+### --- /If Thumb script used --- ###
 
 '''Ananászos sárgarépa torta tojás, olaj, tejtermék és gluténmentesen'''
 =About=
