@@ -39,9 +39,25 @@ def profile():
             url = base + recipe_link
             page_list.append(url)
 
+def get_about(soup):
+    about = soup.find(id='about')
+    about_ext = about.p.extract()
+    about_clean = about_ext.get_text()
+    return about_clean
+
 def get_title(about):
     title = about.find('h1')
     return title.text.strip()
+
+def get_mainpic():
+
+def download_mainpic():
+
+def get_ingredients():
+
+def get_steps():
+
+def download_steppic():
 
 def recipe():
     #--- Inside the Recipe Link, Scrape Info for... ---#
@@ -50,9 +66,7 @@ def recipe():
         soup = BeautifulSoup(page.text, 'lxml')
 
         #--- About Section ---#
-        about = soup.find(id='about')
-        about_ext = about.p.extract()
-        about_clean = about_ext.get_text()
+        get_about(soup)
         #--- Title ---#
         title_ext = get_title(about)
 
@@ -94,7 +108,7 @@ def recipe():
         for i, step in enumerate(steps_p):
             extracted = step.p.extract()
             extract = extracted.text.strip()
-        #---- Ingredients Pics ----#
+        #---- Steps Pics ----#
             steps_pics_lines = steps_pics_messy[i].a
             for child in steps_pics_lines.children:
                 try:
@@ -103,7 +117,7 @@ def recipe():
                     pic_jpg = os.path.split(pic_link)[0]
                     pic_jpg2 = os.path.split(pic_jpg)[0]
                     pic_jpg3 = os.path.split(pic_jpg2)[1]
-                    pic_name = 'ING-' + pic_jpg3 + '-' + str(i) + '.jpg'
+                    pic_name = 'STEP-' + pic_jpg3 + '-' + str(i) + '.jpg'
                     f.write('\n' + '[[File:' + pic_name + '|300px|Step ' + str(i) + ']]' + '\n')
                     f.write('\n' + str(i) + '. ' + extract + '\n')
                     #r3 = requests.get(pic_link)
