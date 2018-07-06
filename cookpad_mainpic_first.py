@@ -43,7 +43,7 @@ def get_about(soup, about):
 
 def get_title(about):
     title = about.find('h1')
-    title_ext = title.text.strip
+    title_ext = title.text.strip()
     return title_ext
 
 def get_mainpic(soup, title_ext):
@@ -116,7 +116,7 @@ def recipe():
         #--- Title ---#
         title_ext = get_title(about)
         #---Main Picture ---#
-        mainpic_clean = get_mainpic(soup, title_ext)
+        get_mainpic(soup, title_ext)
         #----Download Main Pic----#
         #download_mainpic(title_ext, mainpic_clean)
         mainpic_name = title_ext + '.jpg'
