@@ -56,13 +56,15 @@ def get_mainpic(soup, title_ext):
         except:
             print("No Main Picture in " + title_ext)
             pass
-def download_mainpic(title_ext, mainpic_clean):
-    mainpic_jpg = os.path.split(mainpic_clean)[1]
-    mainpic_name = title_ext + '.jpg'
-    #r2 = requests.get(mainpic_clean)
-    #with open(mainpic_name, "wb") as f2:
-    #    f2.write(r2.content)
-    return mainpic_name
+
+# def download_mainpic(title_ext, mainpic_clean):
+#     #mainpic_jpg = os.path.split(mainpic_clean)[1]
+#     mainpic_name = title_ext + '.jpg'
+#     r2 = requests.get(mainpic_clean)
+#     with open(mainpic_name, "wb") as f2:
+#         f2.write(r2.content)
+#     return mainpic_name
+
 def get_ingredients(soup):
     ingredients = soup.find(id='ingredients')
     ingredients_ext = ingredients.ol.extract()
@@ -71,6 +73,7 @@ def get_ingredients(soup):
     for ingredient in ingredients_clean:
         ing = ingredient.text.strip()
         f.write('* ' + ing + '\n')
+
 def get_steps(soup):
     steps = soup.find(id='steps')
     steps_p = steps.find_all(itemprop='recipeInstructions')
@@ -100,6 +103,7 @@ def download_steppic(steps_pics_lines, extract, i):
         except:
             f.write('\n' + str(i) + '. ' + extract + '\n')
             pass
+
 def recipe():
     #--- Inside the Recipe Link, Scrape Info for... ---#
     for item in page_list:
@@ -114,8 +118,8 @@ def recipe():
         #---Main Picture ---#
         mainpic_clean = get_mainpic(soup, title_ext)
         #----Download Main Pic----#
-        download_mainpic(title_ext, mainpic_clean)
-        mainpic_name=download_mainpic(title_ext, mainpic_clean)
+        #download_mainpic(title_ext, mainpic_clean)
+        mainpic_name = title_ext + '.jpg'
 
         f.write('\n' + "{{-start-}}" + "\n")
         f.write('\n' + '[[File:' + mainpic_name + '|' + 'link=' + item + "|'''" + title_ext + "'''" + ']]' + '\n')

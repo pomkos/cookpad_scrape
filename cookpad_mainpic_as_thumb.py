@@ -58,7 +58,7 @@ for item in page_list:
             print("No Main Picture in " + title_ext)
             pass
     #----Download Main Pic----#
-    mainpic_jpg = os.path.split(mainpic_clean)[1]
+    #mainpic_jpg = os.path.split(mainpic_clean)[1]
     mainpic_name = title_ext + '.jpg'
     #r2 = requests.get(mainpic_clean)
     #with open(mainpic_name, "wb") as f2:
