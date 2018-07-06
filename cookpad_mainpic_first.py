@@ -15,9 +15,6 @@ num_input = 100000
 
 page_list = []
 
-profile()
-recipe()
-
 def profile():
     #--- Get the Next Page in the Profile ---#
     for i in range(1, num_input + 1):
@@ -39,8 +36,7 @@ def profile():
             url = base + recipe_link
             page_list.append(url)
 
-def get_about(soup):
-    about = soup.find(id='about')
+def get_about(soup, about):
     about_ext = about.p.extract()
     about_clean = about_ext.get_text()
     return about_clean
@@ -104,18 +100,19 @@ def download_steppic(steps_pics_lines, extract, i):
         except:
             f.write('\n' + str(i) + '. ' + extract + '\n')
             pass
-def recipe(about, get_mainpic):
+def recipe():
     #--- Inside the Recipe Link, Scrape Info for... ---#
     for item in page_list:
         page = requests.get(item)
         soup = BeautifulSoup(page.text, 'lxml')
+        about = soup.find(id='about')
 
         #--- About Section ---#
-        about_clean = get_about(soup)
+        about_clean = get_about(soup, about)
         #--- Title ---#
         title_ext = get_title(about)
         #---Main Picture ---#
-        mainpic_clean = get_mainpic(soup)
+        mainpic_clean = get_mainpic(soup, title_ext)
         #----Download Main Pic----#
         download_mainpic(title_ext, mainpic_clean)
         mainpic_name=download_mainpic(title_ext, mainpic_clean)
@@ -132,3 +129,6 @@ def recipe(about, get_mainpic):
         f.write('\n' + '[[Category:Recipes]]' + '\n')
         f.write('\n' + '{{-stop-}}' + '\n')
         print("Scraped:  " + title_ext)
+
+profile()
+recipe()
