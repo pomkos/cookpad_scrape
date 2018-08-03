@@ -57,13 +57,15 @@ def get_mainpic(soup, title_ext):
             print("No Main Picture in " + title_ext)
             pass
 
-# def download_mainpic(title_ext, mainpic_clean):
-#     #mainpic_jpg = os.path.split(mainpic_clean)[1]
-#     mainpic_name = title_ext + '.jpg'
-#     r2 = requests.get(mainpic_clean)
-#     with open(mainpic_name, "wb") as f2:
-#         f2.write(r2.content)
-#     return mainpic_name
+def download_mainpic(title_ext, mainpic_clean, item):
+    if mainpic_clean is None:
+        return
+    else:
+        mainpic_name = title_ext + '.jpg'
+        # r2 = requests.get(mainpic_clean)
+        # with open(mainpic_name, "wb") as f2:
+        #     f2.write(r2.content)
+        f.write('\n' + '[[File:' + mainpic_name + '|' + 'link=' + item + "|'''" + title_ext + "'''" + ']]' + '\n')
 
 def get_ingredients(soup):
     ingredients = soup.find(id='ingredients')
@@ -97,8 +99,8 @@ def download_steppic(steps_pics_lines, extract, i):
             pic_name = 'STEP-' + pic_jpg3 + '-' + str(i) + '.jpg'
             f.write('\n' + '[[File:' + pic_name + '|300px|Step ' + str(i) + ']]' + '\n')
             f.write('\n' + str(i) + '. ' + extract + '\n')
-            #r3 = requests.get(pic_link)
-            #with open(pic_name, "wb") as f3:
+            # r3 = requests.get(pic_link)
+            # with open(pic_name, "wb") as f3:
             #    f3.write(r3.content)
         except:
             f.write('\n' + str(i) + '. ' + extract + '\n')
@@ -116,15 +118,12 @@ def recipe():
         #--- Title ---#
         title_ext = get_title(about)
         #---Main Picture ---#
-        get_mainpic(soup, title_ext)
+        mainpic_clean = get_mainpic(soup, title_ext)
         #----Download Main Pic----#
-        #download_mainpic(title_ext, mainpic_clean)
-        mainpic_name = title_ext + '.jpg'
-
         f.write('\n' + "{{-start-}}" + "\n")
-        f.write('\n' + '[[File:' + mainpic_name + '|' + 'link=' + item + "|'''" + title_ext + "'''" + ']]' + '\n')
+        download_mainpic(title_ext, mainpic_clean, item)
         f.write('\n' + '=About=' + '\n' + about_clean + '\n')
-
+        
         #--- Ingredients ---#
         get_ingredients(soup)
         #--- Steps ---#
@@ -133,6 +132,6 @@ def recipe():
         f.write('\n' + '[[Category:Recipes]]' + '\n')
         f.write('\n' + '{{-stop-}}' + '\n')
         print("Scraped:  " + title_ext)
-
+        
 profile()
 recipe()
