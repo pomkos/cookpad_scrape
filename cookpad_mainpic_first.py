@@ -62,9 +62,11 @@ def download_mainpic(title_ext, mainpic_clean, item):
         return
     else:
         mainpic_name = title_ext + '.jpg'
-        # r2 = requests.get(mainpic_clean)
-        # with open(mainpic_name, "wb") as f2:
-        #     f2.write(r2.content)
+        dir1 = 'main_pics'
+        dirpath = os.path.join(dir1,mainpic_name)
+        r2 = requests.get(mainpic_clean)
+        with open(dirpath, "wb") as f2:
+            f2.write(r2.content)
         f.write('\n' + '[[File:' + mainpic_name + '|' + 'link=' + item + "|'''" + title_ext + "'''" + ']]' + '\n')
 
 def get_ingredients(soup):
@@ -99,9 +101,11 @@ def download_steppic(steps_pics_lines, extract, i):
             pic_name = 'STEP-' + pic_jpg3 + '-' + str(i) + '.jpg'
             f.write('\n' + '[[File:' + pic_name + '|300px|Step ' + str(i) + ']]' + '\n')
             f.write('\n' + str(i) + '. ' + extract + '\n')
-            # r3 = requests.get(pic_link)
-            # with open(pic_name, "wb") as f3:
-            #    f3.write(r3.content)
+            dir1 = 'step_pics'
+            dirpath = os.path.join(dir1,pic_name)
+            r3 = requests.get(pic_link)
+            with open(dirpath, "wb") as f3:
+               f3.write(r3.content)
         except:
             f.write('\n' + str(i) + '. ' + extract + '\n')
             pass
