@@ -21,7 +21,7 @@ pip install -r requirements.txt
 python3 cookpad_mainpic_first.py
 ```
 ## Download pics:
-Uncomment lines 65, 66, 67 + 102, 103, 104. Then:
+Uncomment lines 65-69, and 104-108. Then:
 ```
 python3 cookpad_mainpic_first.py
 ```
