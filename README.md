@@ -11,6 +11,22 @@ NOTES:
 * pythonwikibot command:
     python3 pwb.py pagefromfile -force -file:recipes2.doc
 
+# Start scrape:
+## Prereqs:
+```
+pip install -r requirements.txt
+```
+## Don't download pics:
+```
+python3 cookpad_mainpic_first.py
+```
+## Download pics:
+Uncomment lines 65, 66, 67 + 102, 103, 104. Then:
+```
+python3 cookpad_mainpic_first.py
+```
+
+
 # Output
 How the scrape output looks like:
 
