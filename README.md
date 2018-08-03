@@ -16,11 +16,11 @@ NOTES:
 ```
 pip install -r requirements.txt
 ```
-## Don't download pics:
+## Recipes only:
 ```
 python3 cookpad_mainpic_first.py
 ```
-## Download pics:
+## Recipes + pictures:
 Uncomment lines 65-69, and 104-108. Then:
 ```
 python3 cookpad_mainpic_first.py
