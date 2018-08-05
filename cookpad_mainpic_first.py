@@ -132,7 +132,6 @@ def recipe():
         get_ingredients(soup)
         #--- Steps ---#
         get_steps(soup)
-    # f.write('\n </gallery>')
         f.write('\n' + '[[Category:Recipes]]' + '\n')
         f.write('\n' + '{{-stop-}}' + '\n')
         print("Scraped:  " + title_ext)
