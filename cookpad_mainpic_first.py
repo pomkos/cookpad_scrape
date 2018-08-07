@@ -7,15 +7,16 @@ import os
 import urllib
 from bs4 import BeautifulSoup
 
-f = (open('recipes2.doc', 'w'))
+f = (open('recipes.doc', 'w'))
 
-# input("What is the profile link? ")
-base_input = 'https://cookpad.com/hu/felhasznalok/6659384'
 num_input = 100000
 
 page_list = []
 
-def profile():
+def profile(cookpad_profile):
+    print('SHUT UP RUSSELL')
+    # input("What is the profile link? ")
+    base_input = cookpad_profile
     #--- Get the Next Page in the Profile ---#
     for i in range(1, num_input + 1):
         next_page = '?page=' + str(i)
@@ -35,6 +36,7 @@ def profile():
             recipe_link = recipe_clear.get('href')
             url = base + recipe_link
             page_list.append(url)
+        print('search page number ' + str(i) + 'received')
 
 def get_about(soup, about):
     about_ext = about.p.extract()
@@ -135,6 +137,3 @@ def recipe():
         f.write('\n' + '[[Category:Recipes]]' + '\n')
         f.write('\n' + '{{-stop-}}' + '\n')
         print("Scraped:  " + title_ext)
-        
-profile()
-recipe()
