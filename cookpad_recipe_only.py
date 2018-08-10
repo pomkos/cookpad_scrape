@@ -107,3 +107,4 @@ def recipe(url):
     f.write('\n' + '[[Category:Recipes]]' + '\n')
     f.write('\n' + '{{-stop-}}' + '\n')
     print("Scraped:  " + title_ext)
+    return title_ext

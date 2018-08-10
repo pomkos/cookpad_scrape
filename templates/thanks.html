@@ -1,0 +1,15 @@
+<!-- HTML doc must start with declaration that specifies -->
+<!-- HTML doc must be in templates folder for flask to see it -->
+<!DOCTYPE html> 
+<html>
+    <!-- Outside body tag can be CSS, Javascript, etc. -->
+    <body>
+    {% block content %}
+        <div class="home">
+            <h1>Thanks {{ name }}</h1>
+            <p>Your request has been submitted. Check out the recipe <a href="https://wiki.thegates.online/index.php?title={{ title }}">here</a>.</p>
+            <p><a href="https://cookpad.thegates.online">Submit another recipe.</a></p>
+        </div>
+    {% endblock %}
+    </body>
+</html>
