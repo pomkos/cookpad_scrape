@@ -7,9 +7,6 @@ import os
 import urllib
 from bs4 import BeautifulSoup
 
-f = (open('recipes2.doc', 'w'))
-
-
 def get_about(soup, about):
     about_ext = about.p.extract()
     about_clean = about_ext.get_text()
@@ -31,15 +28,19 @@ def get_mainpic(soup, title_ext):
             print("No Main Picture in " + title_ext)
             pass
 
-def download_mainpic(title_ext, mainpic_clean):
-    #mainpic_jpg = os.path.split(mainpic_clean)[1]
-    mainpic_name = title_ext + '.jpg'
-    r2 = requests.get(mainpic_clean)
-    with open(mainpic_name, "wb") as f2:
-        f2.write(r2.content)
-    return mainpic_name
+def download_mainpic(title_ext, mainpic_clean, url, f):
+    if mainpic_clean is None:
+        return
+    else:
+        mainpic_name = title_ext + '.jpg'
+        dir1 = 'main_pics'
+        dirpath = os.path.join(dir1,mainpic_name)
+        r2 = requests.get(mainpic_clean)
+        with open(dirpath, "wb") as f2:
+            f2.write(r2.content)
+        f.write('\n' + '[[File:' + mainpic_name + '|' + 'link=' + url + "|'''" + title_ext + "'''" + ']]' + '\n')
 
-def get_ingredients(soup):
+def get_ingredients(soup, f):
     ingredients = soup.find(id='ingredients')
     ingredients_ext = ingredients.ol.extract()
     ingredients_clean = ingredients_ext.find_all(itemprop='ingredients')
@@ -48,7 +49,7 @@ def get_ingredients(soup):
         ing = ingredient.text.strip()
         f.write('* ' + ing + '\n')
 
-def get_steps(soup):
+def get_steps(soup, f):
     steps = soup.find(id='steps')
     steps_p = steps.find_all(itemprop='recipeInstructions')
     steps_pics_messy = steps.find_all(class_='step numbered-list__item card-sm')
@@ -58,9 +59,9 @@ def get_steps(soup):
         extract = extracted.text.strip()
     #---- Steps Pics ----#
         steps_pics_lines = steps_pics_messy[i].a
-        download_steppic(steps_pics_lines, extract, i)
+        download_steppic(steps_pics_lines, extract, i, f)
 
-def download_steppic(steps_pics_lines, extract, i):
+def download_steppic(steps_pics_lines, extract, i, f):
     for child in steps_pics_lines.children:
         try:
             i=i+1
@@ -71,19 +72,20 @@ def download_steppic(steps_pics_lines, extract, i):
             pic_name = 'STEP-' + pic_jpg3 + '-' + str(i) + '.jpg'
             f.write('\n' + '[[File:' + pic_name + '|300px|Step ' + str(i) + ']]' + '\n')
             f.write('\n' + str(i) + '. ' + extract + '\n')
+            dir1 = 'step_pics'
+            dirpath = os.path.join(dir1,pic_name)
             r3 = requests.get(pic_link)
-            with open(pic_name, "wb") as f3:
+            with open(dirpath, "wb") as f3:
                f3.write(r3.content)
         except:
             f.write('\n' + str(i) + '. ' + extract + '\n')
             pass
 
 def recipe(url):
-    # input("What is the profile link? ")
-    recipe_input = url
+    f = (open('recipe.doc', 'w'))
 
-#--- Inside the Recipe Link, Scrape Info for... ---#
-    page = requests.get(recipe_input)
+    #--- Inside the Recipe Link, Scrape Info for... ---#
+    page = requests.get(url)
     soup = BeautifulSoup(page.text, 'lxml')
     about = soup.find(id='about')
 
@@ -92,23 +94,16 @@ def recipe(url):
     #--- Title ---#
     title_ext = get_title(about)
     #---Main Picture ---#
-    get_mainpic(soup, title_ext)
+    mainpic_clean = get_mainpic(soup, title_ext)
     #----Download Main Pic----#
-    #download_mainpic(title_ext, mainpic_clean)
-    mainpic_name = title_ext + '.jpg'
-
     f.write('\n' + "{{-start-}}" + "\n")
-    f.write('\n' + '[[File:' + mainpic_name + '|' + 'link=' + recipe_input + "|'''" + title_ext + "'''" + ']]' + '\n')
+    download_mainpic(title_ext, mainpic_clean, url, f)
     f.write('\n' + '=About=' + '\n' + about_clean + '\n')
-
+    
     #--- Ingredients ---#
-    get_ingredients(soup)
+    get_ingredients(soup, f)
     #--- Steps ---#
-    get_steps(soup)
-# f.write('\n </gallery>')
+    get_steps(soup, f)
     f.write('\n' + '[[Category:Recipes]]' + '\n')
     f.write('\n' + '{{-stop-}}' + '\n')
-    return("Scraped:  " + title_ext)
-
-if __name__ == "__main__": #runs code when called directly
-    recipe('https://cookpad.com/hu/receptek/5298449-savanyu-kaposztas-lencseleves-parazson-sult-zoldsegekkel')
+    print("Scraped:  " + title_ext)

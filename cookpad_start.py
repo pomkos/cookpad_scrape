@@ -1,5 +1,5 @@
 from flask import request, Flask
-from cookpad_mainpic_first import profile, recipe
+from cookpad_recipe_only import recipe
 
 app = Flask(__name__) #create Flask app
 
@@ -8,15 +8,14 @@ def cookpad_form(): # sending via forms as a post request (behind the scenes)
 
     #--- Check if its a post or get request: ---#
     if request.method == 'POST': #this block is only entered if the form is submitted
-        cookpad_profile = request.form.get('profile')
+        url = request.form.get('recipe')
         user = request.form['name']
-        profile(cookpad_profile)
-        recipe()
+        recipe(url)
         return '''<h1>Thanks {},</h1> your request has been submitted'''.format(user)
 
     #--- Make the form ---#
     return '''<form method = "POST">
-                    What is the cookpad profile? <input type="text" name="profile"><br>
+                    What is the cookpad recipe page? <input type="text" name="recipe"><br>
                     What is your name? <input type="text" name="name"><br>
                     <input type="submit" value="Submit"><br>
                 </form>'''
