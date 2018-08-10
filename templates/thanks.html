@@ -4,12 +4,18 @@
 <html>
     <!-- Outside body tag can be CSS, Javascript, etc. -->
     <body>
-    {% block content %}
-        <div class="home">
+        {% extends "layout.html" %} <!-- link page to layout.html -->
+        {% block content %}
+        <div class="thanks">
             <h1>Thanks {{ name }}</h1>
-            <p>Your request has been submitted. Check out the recipe <a href="https://wiki.thegates.online/index.php?title={{ title }}">here</a>.</p>
-            <p><a href="https://cookpad.thegates.online">Submit another recipe.</a></p>
+            <p>Your request has been submitted. 
+                <ul>
+                    <li>Check out the recipe <a href="https://wiki.thegates.online/index.php?title={{ title }}">here</a>.</li>
+                    <li>Check out <a href = "https://wiki.thegates.online/index.php?title=Category:Recipes">all our recipes</a> (it may take a while for your submission to appear in this list).</li>
+                </ul>
+                Or <a href="https://cookpad.thegates.online">submit another recipe</a>.
+            </p>
         </div>
-    {% endblock %}
+        {% endblock %}
     </body>
 </html>
