@@ -1,11 +1,13 @@
 # Assumptions:
-* mediawiki is installed in /var/www/mediawiki and fully set up via mydomain.com
+* mediawiki is installed in /var/www/mediawiki
 ```
 cd /var/www
 sudo wget https://releases.wikimedia.org/mediawiki/1.31/mediawiki-1.31.0.tar.gz
 sudo tar -xvzf mediawiki*
 sudo mv mediawiki* mediawiki
 ```
+* mediawiki is fully set up via mydomain.com
+https://www.digitalocean.com/community/tutorials/how-to-install-mediawiki-on-ubuntu-14-04
 
 # Required to host the website:
 
