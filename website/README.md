@@ -1,3 +1,12 @@
+# Assumptions:
+* mediawiki is installed in /var/www/mediawiki and fully set up via mydomain.com
+```
+cd /var/www
+sudo wget https://releases.wikimedia.org/mediawiki/1.31/mediawiki-1.31.0.tar.gz
+sudo tar -xvzf mediawiki*
+sudo mv mediawiki* mediawiki
+```
+
 # Required to host the website:
 
 ## core folder
