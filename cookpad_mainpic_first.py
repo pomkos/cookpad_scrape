@@ -1,5 +1,4 @@
 ### ----- Start with: python3 russell.py ----- ###
-### ----- Picture download function commented out ----- ###
 ### ----- pythonwikibot command:
 #               python3 pwb.py pagefromfile -force -file:recipes2.doc
 import requests
