@@ -57,7 +57,7 @@ server {
 ![alt text](https://i.imgur.com/cYvHHoI.png)
 
 ## Scraping success:
-![alt text](https://i.imgur.com/cYvHHoI.png)
+![alt text](https://i.imgur.com/kiAkTCQ.png)
 
 ## Scraping error:
-![alt text](https://i.imgur.com/kiAkTCQ.png)
+![alt text](https://i.imgur.com/uknib8m.png)
