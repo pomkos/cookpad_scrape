@@ -6,8 +6,7 @@ sudo wget https://releases.wikimedia.org/mediawiki/1.31/mediawiki-1.31.0.tar.gz
 sudo tar -xvzf mediawiki*
 sudo mv mediawiki* mediawiki
 ```
-* mediawiki is fully set up via mydomain.com
-https://www.digitalocean.com/community/tutorials/how-to-install-mediawiki-on-ubuntu-14-04
+* mediawiki is [fully set up](https://www.digitalocean.com/community/tutorials/how-to-install-mediawiki-on-ubuntu-14-04) via mydomain.com
 
 # Required to host the website:
 
