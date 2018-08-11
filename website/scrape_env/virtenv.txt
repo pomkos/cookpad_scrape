@@ -1,0 +1,6 @@
+This folder should contain a python virtual environment, with all requirements installed within.
+
+python3.6 -m venv scrape_env # make environment
+source scrape_env/bin/activate # use environment
+cp ~/cookpad_scrape/requirements.txt ~/cookpad_scrape/website/scrape_env # copy-paste requirements.txt
+pip install -r requirements.txt # install all requirements

@@ -1,0 +1,5 @@
+This folder should contain pythonwikibot, fully set up and owned by nginx:
+
+sudo chown www-data:www-data core -R
+
+https://www.mediawiki.org/wiki/Manual:Pywikibot
