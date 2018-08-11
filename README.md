@@ -7,7 +7,7 @@ NOTES:
 * Mainpic script: click on the mainpic to get to the original cookpad webpage
 * Thumb script: click on caption under the thumbnail of the mainpic to get to the original cookpad webpage
 * Picture download function commented out
-* Pictures will download in the folder this script is in
+* Pictures will download in the site_pics folder. NOTE: recommended mediawiki LocalUpload extension pointed to this folder as well.
 * pythonwikibot command:
     python3 pwb.py pagefromfile -force -file:recipes2.doc
 
