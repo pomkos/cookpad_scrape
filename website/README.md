@@ -3,6 +3,8 @@ Required to host the website:
 # core folder
 * This folder should contain pythonwikibot, fully set up and owned by nginx:
 ```
+wget http://tools.wmflabs.org/pywikibot/core.tar.gz
+tar -xvzf core.tar.gz
 sudo chown www-data:www-data core -R
 ```
 * https://www.mediawiki.org/wiki/Manual:Pywikibot
