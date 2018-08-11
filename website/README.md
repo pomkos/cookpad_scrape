@@ -51,3 +51,13 @@ server {
 }
 ```
 * run letsencrypt as needed
+
+# Result:
+## Scraper form:
+![alt text](https://i.imgur.com/cYvHHoI.png)
+
+## Scraping success:
+![alt text](https://i.imgur.com/cYvHHoI.png)
+
+## Scraping error:
+![alt text](https://i.imgur.com/kiAkTCQ.png)
