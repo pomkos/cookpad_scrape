@@ -6,7 +6,14 @@ sudo wget https://releases.wikimedia.org/mediawiki/1.31/mediawiki-1.31.0.tar.gz
 sudo tar -xvzf mediawiki*
 sudo mv mediawiki* mediawiki
 ```
-* highly recommended: [UploadLocal extension](https://www.mediawiki.org/wiki/Extension:UploadLocal), with default folder set to /home/USER/cookpad_scrape/website/
+* highly recommended: [UploadLocal extension](https://www.mediawiki.org/wiki/Extension:UploadLocal), with default folder set to location of site_pics
+```
+sudo nano /var/www/mediawiki/LocalSettings.php
+
+# Extension: UploadLocal
+require_once("$IP/extensions/UploadLocal/UploadLocal.php");
+$wgUploadLocalDirectory = $GP . '/var/www/website/scrape/site_pics';
+```
 
 # Required to host the website:
 
