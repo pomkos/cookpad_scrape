@@ -16,12 +16,21 @@ NOTES:
 ```
 pip install -r requirements.txt
 ```
-## Recipes only:
+## One recipe only:
+```
+python3 cookpad_recipe_only.py
+```
+### Without pictures:
+Comment out lines 36-40 and 75-79. Then:
+```
+python3 cookpad_recipe_only.py
+```
+## Entire profile:
 ```
 python3 cookpad_mainpic_first.py
 ```
-## Recipes + pictures:
-Uncomment lines 65-69, and 104-108. Then:
+### Without pictures:
+Comment out lines 66-70 and 105-109. Then:
 ```
 python3 cookpad_mainpic_first.py
 ```
