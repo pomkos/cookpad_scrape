@@ -1,6 +1,6 @@
-Required to host the website:
+# Required to host the website:
 
-# core folder
+## core folder
 * This folder should contain pythonwikibot, fully set up and owned by nginx:
 ```
 wget http://tools.wmflabs.org/pywikibot/core.tar.gz
@@ -9,7 +9,7 @@ sudo chown www-data:www-data core -R
 ```
 * https://www.mediawiki.org/wiki/Manual:Pywikibot
 
-# scrape_env folder
+## scrape_env folder
 * This folder should contain a python virtual environment, with all requirements installed within.
 
 ```
@@ -19,7 +19,7 @@ cp ~/cookpad_scrape/requirements.txt ~/cookpad_scrape/website/scrape_env # copy-
 pip install -r requirements.txt # install all requirements
 ```
 
-# Hosting with nginx
+## hosting with nginx
 * In /etc/systemd/system/[my_cookpad_scraper].service
 ```
 [Unit]
