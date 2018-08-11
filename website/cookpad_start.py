@@ -27,7 +27,9 @@ def scraper(): # sending via forms as a post request (behind the scenes)
 def publish(user):
     #--- Copy the recipe.doc file to a new dir ---#
         #shutil.copy2 can copy directories as well
-    shutil.copyfile('/var/www/homepage/scrape/recipe.doc', '/var/www/homepage/scrape/core/recipe.doc') 
+    shutil.copyfile('/var/www/homepage/scrape/recipe.doc', '/var/www/homepage/scrape/core/recipe.doc')
+    shutil.copy2('/var/www/homepage/scrape/main_pics/*', '/var/www/mediawiki/extensions/UploadLocal/data')
+    shutil.copy2('/var/www/homepage/scrape/step_pics/*', '/var/www/mediawiki/extensions/UploadLocal/data')
     os.chdir("/var/www/homepage/scrape")
     subprocess.run(['./run_pwb.sh']) # Just run the program
     # os.system("./pwb.py pagefromfile -file:recipe.doc -force -summary:'Uploaded by {}' ".format(user))
