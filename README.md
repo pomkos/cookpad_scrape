@@ -16,6 +16,10 @@ NOTES:
 ```
 pip install -r requirements.txt
 ```
+## One recipe only:
+```
+python3 cookpad_recipe_only.py
+```
 ## Recipes only:
 ```
 python3 cookpad_mainpic_first.py
