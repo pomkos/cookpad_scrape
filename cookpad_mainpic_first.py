@@ -13,7 +13,6 @@ num_input = 100000
 page_list = []
 
 def profile(cookpad_profile):
-    print('SHUT UP RUSSELL')
     # input("What is the profile link? ")
     base_input = cookpad_profile
     #--- Get the Next Page in the Profile ---#
@@ -63,7 +62,7 @@ def download_mainpic(title_ext, mainpic_clean, item):
         return
     else:
         mainpic_name = title_ext + '.jpg'
-        dir1 = 'main_pics'
+        dir1 = 'site_pics'
         dirpath = os.path.join(dir1,mainpic_name)
         r2 = requests.get(mainpic_clean)
         with open(dirpath, "wb") as f2:
@@ -102,7 +101,7 @@ def download_steppic(steps_pics_lines, extract, i):
             pic_name = 'STEP-' + pic_jpg3 + '-' + str(i) + '.jpg'
             f.write('\n' + '[[File:' + pic_name + '|300px|Step ' + str(i) + ']]' + '\n')
             f.write('\n' + str(i) + '. ' + extract + '\n')
-            dir1 = 'step_pics'
+            dir1 = 'site_pics'
             dirpath = os.path.join(dir1,pic_name)
             r3 = requests.get(pic_link)
             with open(dirpath, "wb") as f3:
