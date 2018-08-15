@@ -4,9 +4,11 @@ import os
 import shutil
 import fnmatch
 import subprocess
+import requests
 
 app = Flask(__name__) #create Flask app
 
+#--- Cookpad Scraper Stuff ---#
 @app.route('/', methods=['GET','POST']) #allow get and post requests
 def scraper(): # sending via forms as a post request (behind the scenes)
     #--- Check if its a post or get request: ---#
@@ -28,6 +30,7 @@ def scraper(): # sending via forms as a post request (behind the scenes)
             return redirect(url_for('thanks', title=title, user=user)) #redirects to url.com/thanks?title=something&user=something_else. Variables are in the link
         else: #otherwise return bad_link.html
             return redirect(url_for('bad_link', link=url, user=user))
+        telegram(user, title)
 
     #--- Make the form ---#
     return render_template('scraper.html')
@@ -38,6 +41,17 @@ def publish(user):
     shutil.copyfile('/var/www/homepage/scrape/recipe.doc', '/var/www/homepage/scrape/core/recipe.doc') 
     os.chdir("/var/www/homepage/scrape")
     subprocess.run(['./run_pwb.sh']) # Just run the program
+    
+def telegram(user, title):
+    #--- Send a notification to telegram that a recipe has been wikified ---#
+    token = '653820863:AAGqWiXEzAA5PV7hI4Z-ov_qarYgiNVqE1A'
+    chat_id = '320247642'
+    text = user + ' finished scraping ' + title
+    url = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(token, chat_id, text)
+    payload = open("request.json")
+    headers = {'content-type': 'application/json', 'Accept-Charset': 'UTF-8'}
+    r = requests.post(url, data=payload, headers=headers)
+    r.json()
 
 @app.route('/thanks')
 def thanks():
