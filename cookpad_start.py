@@ -7,6 +7,7 @@ import subprocess
 
 app = Flask(__name__) #create Flask app
 
+#--- Cookpad Scraper Stuff ---#
 @app.route('/', methods=['GET','POST']) #allow get and post requests
 def scraper(): # sending via forms as a post request (behind the scenes)
     #--- Check if its a post or get request: ---#
