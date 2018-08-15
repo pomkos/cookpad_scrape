@@ -70,7 +70,7 @@ server {
 
 # Result:
 ## Scraper form:
-![alt text](https://i.imgur.com/cYvHHoI.png)
+![alt text](https://i.imgur.com/B7HI38y.png)
 
 ## Scraping success:
 ![alt text](https://i.imgur.com/kiAkTCQ.png)
