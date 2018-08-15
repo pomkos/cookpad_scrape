@@ -28,11 +28,7 @@ def scraper(): # sending via forms as a post request (behind the scenes)
         check_url = 'https://cookpad.com'
         if check_url in url: #if a string is submitted with https://cookpad.com in it
             title = recipe(url, category, dessert, main_dish, side_dish, soup, mommy, user) #puts the title_ext returned from recipe() into the title variable
-        #--- Send data to rethinkdb: cookpad_scrape database ---#
-            print("DATA NOT SENT")
-            send_data(title, url, mommy, category)
-            print("DATA SENT")
-
+            send_data(title, url, mommy, category) # send data to rethinkdb: cookpad_scrape database
             publish(user) #publishes the scraped recipe into wiki
             telegram(user, title) #notifies telegram
 
