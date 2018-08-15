@@ -27,10 +27,11 @@ def scraper(): # sending via forms as a post request (behind the scenes)
         if check_url in url: #if a string is submitted with https://cookpad.com in it
             title = recipe(url, category, dessert, main_dish, side_dish, soup, mommy, user) #puts the title_ext returned from recipe() into the title variable
             publish(user) #publishes the scraped recipe into wiki
+            telegram(user, title) #notifies telegram
+            print('telegram sent')
             return redirect(url_for('thanks', title=title, user=user)) #redirects to url.com/thanks?title=something&user=something_else. Variables are in the link
         else: #otherwise return bad_link.html
             return redirect(url_for('bad_link', link=url, user=user))
-        telegram(user, title)
 
     #--- Make the form ---#
     return render_template('scraper.html')
@@ -43,15 +44,14 @@ def publish(user):
     subprocess.run(['./run_pwb.sh']) # Just run the program
     
 def telegram(user, title):
+    #--- Telegram Params ---#
+    token = '653820863:AAGqWiXEzAA5PV7hI4Z-ov_qarYgiNVqE1A' #find by messaging @BotFather
+    chat_id = '320247642' # find by messaging @ChatsIDsBot
+    message = user + ' finished scraping ' + title #message
+    url = 'https://api.telegram.org/' + 'bot' + token + '/sendMessage'
+
     #--- Send a notification to telegram that a recipe has been wikified ---#
-    token = '653820863:AAGqWiXEzAA5PV7hI4Z-ov_qarYgiNVqE1A'
-    chat_id = '320247642'
-    text = user + ' finished scraping ' + title
-    url = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(token, chat_id, text)
-    payload = open("request.json")
-    headers = {'content-type': 'application/json', 'Accept-Charset': 'UTF-8'}
-    r = requests.post(url, data=payload, headers=headers)
-    r.json()
+    requests.post(url, data={'chat_id':chat_id, 'text':message})
 
 @app.route('/thanks')
 def thanks():
