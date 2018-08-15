@@ -1,5 +1,6 @@
 from flask import request, Flask, render_template, url_for, redirect
 from cookpad_recipe_only import recipe
+from cook_db import send_data, read_data
 import os
 import shutil
 import fnmatch
@@ -22,14 +23,21 @@ def scraper(): # sending via forms as a post request (behind the scenes)
         side_dish = request.form.get('side_dish') 
         soup = request.form.get('soup') 
         mommy = request.form.get('mommy')
+              
         #--- Make sure a valid url was submitted ---#
         check_url = 'https://cookpad.com'
         if check_url in url: #if a string is submitted with https://cookpad.com in it
             title = recipe(url, category, dessert, main_dish, side_dish, soup, mommy, user) #puts the title_ext returned from recipe() into the title variable
+        #--- Send data to rethinkdb: cookpad_scrape database ---#
+            print("DATA NOT SENT")
+            send_data(title, url, mommy, category)
+            print("DATA SENT")
+
             publish(user) #publishes the scraped recipe into wiki
             telegram(user, title) #notifies telegram
-            print('telegram sent')
+
             return redirect(url_for('thanks', title=title, user=user)) #redirects to url.com/thanks?title=something&user=something_else. Variables are in the link
+
         else: #otherwise return bad_link.html
             return redirect(url_for('bad_link', link=url, user=user))
 
