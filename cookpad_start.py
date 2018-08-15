@@ -13,9 +13,17 @@ def scraper(): # sending via forms as a post request (behind the scenes)
     if request.method == 'POST': #this block is only entered if the form is submitted
         url = request.form.get('recipe') 
         user = request.form['name']
+        #--- Assign variables to the multiple choices ---#
+        category = request.form.get('category')
+        dessert = request.form.get('dessert') 
+        main_dish = request.form.get('main_dish') 
+        side_dish = request.form.get('side_dish') 
+        soup = request.form.get('soup') 
+        mommy = request.form.get('mommy')
+        #--- Make sure a valid url was submitted ---#
         check_url = 'https://cookpad.com'
-        if check_url in url: #if a string is submitted with https://cookpad. in it
-            title = recipe(url) #puts the title_ext returned from recipe() into the title variable
+        if check_url in url: #if a string is submitted with https://cookpad.com in it
+            title = recipe(url, category, dessert, main_dish, side_dish, soup, mommy, user) #puts the title_ext returned from recipe() into the title variable
             publish(user) #publishes the scraped recipe into wiki
             return redirect(url_for('thanks', title=title, user=user)) #redirects to url.com/thanks?title=something&user=something_else. Variables are in the link
         else: #otherwise return bad_link.html
@@ -28,9 +36,9 @@ def publish(user):
     #--- Copy the recipe.doc file to a new dir ---#
         #shutil.copy2 can copy directories as well
     shutil.copyfile('/var/www/homepage/scrape/recipe.doc', '/var/www/homepage/scrape/core/recipe.doc') 
-    os.chdir("/var/www/homepage/scrape") #change directories
-    subprocess.run(['./run_pwb.sh']) # run my pwb script
-    
+    os.chdir("/var/www/homepage/scrape")
+    subprocess.run(['./run_pwb.sh']) # Just run the program
+
 @app.route('/thanks')
 def thanks():
     user = request.args.get('user')

@@ -81,14 +81,13 @@ def download_steppic(steps_pics_lines, extract, i, f):
             f.write('\n' + str(i) + '. ' + extract + '\n')
             pass
 
-def recipe(url):
+def recipe(url, category, dessert, main_dish, side_dish, soup, mommy, user):
     f = (open('recipe.doc', 'w'))
 
     #--- Inside the Recipe Link, Scrape Info for... ---#
     page = requests.get(url)
     soup = BeautifulSoup(page.text, 'lxml')
     about = soup.find(id='about')
-
     #--- About Section ---#
     about_clean = get_about(soup, about)
     #--- Title ---#
@@ -105,6 +104,28 @@ def recipe(url):
     #--- Steps ---#
     get_steps(soup, f)
     f.write('\n' + '[[Category:Recipes]]' + '\n')
+    f.write('\n' + '[[Category:' + category + ']]' + '\n')
+
+    if main_dish == 'on': #if the variable is selected on webpage and thus has 'on' string in it
+        f.write('\n' + '[[Category:Main Dish]]' + '\n') #then write that as a category in the recipe.doc
+    if side_dish == 'on':
+        f.write('\n' + '[[Category:Side Dish]]' + '\n')
+    if soup == 'on':
+        f.write('\n' + '[[Category:Soup]]' + '\n')
+    if dessert == 'on':
+        f.write('\n' + '[[Category:Dessert]]' + '\n') 
+    if mommy == 'yes':
+        f.write('\n' + '[[Category:Chef Mom]]' + '\n') 
+    if mommy == 'no':
+        f.write('\n' + '[[Category:Chef Unknown]]' + '\n')
+    else:
+        pass
+
+    if user is None:
+        pass
+    else:
+        f.write('\n' + '[[Category:Submitted by ' + user + ']]' + '\n') 
+
     f.write('\n' + '{{-stop-}}' + '\n')
     print("Scraped:  " + title_ext)
     return title_ext

@@ -9,9 +9,9 @@
 		<title>The Gates' Scraper</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="static/css/main.css" />
+		<link rel="stylesheet" href="../static/css/main.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="static/css/ie9.css" /><![endif]-->
-		<noscript><link rel="stylesheet" href="static/css/noscript.css" /></noscript>
+		<noscript><link rel="stylesheet" href="../static/css/noscript.css" /></noscript>
 	</head>
 	<body>
 
@@ -29,14 +29,41 @@
 									<form method = "POST">
 								            What is the cookpad recipe url? <input type="text" name="recipe"><br>
 								            What is your name? <input type="text" name="name"><br>
-								            <input type="submit" value="Submit"><br>
+											Which category applies? <br>
+												<input type="radio" id="bread" name="category" value="Bread">
+													<label for="bread">Bread</label>
+												<input type="radio" id="fruit" name="category" value="Fruit">
+													<label for="fruit">Fruit</label>
+												<input type="radio" id="veggies" name="category" value="Veggie" checked>
+													<label for="veggies">Veggies</label>
+												<input type="radio" id="other" name="category" value="Other">
+													<label for="other">Other</label> <br>
+											
+											<br>What type of meal is it? <br>
+												<input type="checkbox" id="dessert" name="dessert">
+													<label for="dessert">dessert</label>
+												<input type="checkbox" id="main_dish" name="main_dish" checked>
+													<label for="main_dish">Main Dish</label>
+												<input type="checkbox" id="side_dish" name="side_dish">
+													<label for="side_dish">Side Dish</label>
+												<input type="checkbox" id="soup" name="soup"> 
+													<label for="soup">Soup</label> <br>
+
+
+											<br>Did mom make it? </br>
+												<input type="radio" id="yes" name="mommy" value="yes" checked>
+													<label for="yes">Yes</label>
+												<input type="radio" id="no" name="mommy" value="no">
+													<label for="no">No</label><br>
+
+								            <br><input type="submit" value="Submit"><br>
 							        </form>
 							</article>
 						</div>
 						<nav>
 							<ul>
 								<li><a href="https://wiki.thegates.online">Wiki</a></li>
-								<li><a href="https://to-do.microsoft.com/sharing?InvitationToken=9viXDsty6sjapuDsDPkhLgro1H8vzDaiTXupVztGP7Ok2MjEryi4YgG-Hyf8LL0T4">Grocery List</a></li>
+								<li><a href="https://groceries.thegates.online/">Grocery List</a></li>
 								<li><a href="https://thegates.online">Home</a></li>
 								<li><a href="https://cookpad.com/hu/felhasznalok/6659384">Mom's Recipes</a></li>
                                                                 <li><a href="https://bitwarden.thegates.online">Bitwarden</a></li>
@@ -55,10 +82,10 @@
 			<div id="bg"></div>
 
 		<!-- Scripts -->
-			<script src="static/js/jquery.min.js"></script>
-			<script src="static/js/skel.min.js"></script>
-			<script src="static/js/util.js"></script>
-			<script src="static/js/main.js"></script>
+			<script src="../static/js/jquery.min.js"></script>
+			<script src="../static/js/skel.min.js"></script>
+			<script src="../static/js/util.js"></script>
+			<script src="../static/js/main.js"></script>
 
 	</body>
 </html>
