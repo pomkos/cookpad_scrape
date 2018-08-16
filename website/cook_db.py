@@ -17,7 +17,8 @@ def send_data(title, url, mommy, category):
             {'Title': title,
                 "Recipe": url,
                 "Author": "Chef Mom",
-                "Category": category}
+                "Category": category},
+            conflict="error"
             ).run()
         read_data()
     if mommy == 'no':
@@ -25,7 +26,8 @@ def send_data(title, url, mommy, category):
             {'Title': title,
                 "Recipe": url,
                 "Author": "Chef Unknown",
-                "Category": category}
+                "Category": category},
+            conflict="error"
             ]).run()
         read_data()
 
