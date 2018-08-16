@@ -49,8 +49,8 @@ def publish(user):
     
 def telegram(user, title):
     #--- Telegram Params ---#
-    token = '653820863:AAGqWiXEzAA5PV7hI4Z-ov_qarYgiNVqE1A' #find by messaging @BotFather
-    chat_id = '320247642' # find by messaging @ChatsIDsBot
+    token = 'CHANGE ME' #find by messaging @BotFather
+    chat_id = 'CHANGE ME' # find by messaging @ChatsIDsBot
     message = user + ' finished scraping ' + title #message
     url = 'https://api.telegram.org/' + 'bot' + token + '/sendMessage'
 
