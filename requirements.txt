@@ -3,6 +3,4 @@ requests
 lxml
 flask
 uwsgi
-shutil
-fnmatch
-subprocess
+rethinkdb
