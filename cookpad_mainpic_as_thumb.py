@@ -6,6 +6,7 @@ import requests
 import os
 import urllib
 from bs4 import BeautifulSoup
+import rethinkdb as r
 
 f = (open('recipes2.doc', 'w'))
 
@@ -135,6 +136,16 @@ def recipe():
         f.write('\n' + '[[Category:Recipes]]' + '\n')
         f.write('\n' + '{{-stop-}}' + '\n')
         print("Scraped:  " + title_ext)
-        
+        sendto_db(title_ext, item)
+
+def sendto_db(title_ext, item):
+    r.connect( "localhost", 28015).repl()
+    r.db("cookpad_scrape").table("mom").insert(
+        {'Title': title_ext,
+            "Recipe": item,
+            "Author": "Chef Mom"},
+        conflict="update"
+        ).run()
+
 profile()
 recipe()
