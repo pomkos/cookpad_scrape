@@ -19,7 +19,8 @@ def send_data(title, url, mommy, category):
                 "Author": "Chef Mom",
                 "Category": category}
             ).run()
-        read_data()
+        print('SENT to rethinkdb: ' + title)
+        #read_data()
     if mommy == 'no':
         r.db("cookpad_scrape").table("not_mom").insert([
             {'Title': title,
@@ -27,7 +28,8 @@ def send_data(title, url, mommy, category):
                 "Author": "Chef Unknown",
                 "Category": category}
             ]).run()
-        read_data()
+        print('SENT to rethinkdb: ' + title)
+        #read_data()
 
 def read_data():
     r.connect( "localhost", 28015).repl()

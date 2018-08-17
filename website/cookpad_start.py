@@ -8,9 +8,17 @@ import subprocess
 import requests
 
 app = Flask(__name__) #create Flask app
+app._static_folder = 'static/'
+
+
+@app.route('/', methods=['GET','POST'])
+def homepage():
+        #--- Check if its a post or get request: ---#
+    if request.method == 'POST': #this block is only entered if the form is submitted
+        scraper()
+    return render_template('index.html')
 
 #--- Cookpad Scraper Stuff ---#
-@app.route('/', methods=['GET','POST']) #allow get and post requests
 def scraper(): # sending via forms as a post request (behind the scenes)
     #--- Check if its a post or get request: ---#
     if request.method == 'POST': #this block is only entered if the form is submitted
@@ -38,7 +46,7 @@ def scraper(): # sending via forms as a post request (behind the scenes)
             return redirect(url_for('bad_link', link=url, user=user))
 
     #--- Make the form ---#
-    return render_template('scraper.html')
+    return render_template('#Scraper')
 
 def publish(user):
     #--- Copy the recipe.doc file to a new dir ---#
